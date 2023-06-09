@@ -1,3 +1,4 @@
+import React from "react";
 import logo from "../assets/Recurso 14@4x.png";
 import { useQuery, gql } from "@apollo/client";
 
