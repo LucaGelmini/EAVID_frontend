@@ -1,13 +1,6 @@
-import { useQuery, gql } from "@apollo/client";
 import Main from "../layouts/Main";
 
-function App() {
-  const { loading, error, data } = useQuery(PAGES_SLUG);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
-  console.log(">>>>>>>>>>>>>>>>", data);
-
+function Landing() {
   return (
     <Main>
       <>
@@ -18,17 +11,4 @@ function App() {
   );
 }
 
-export default App;
-
-const PAGES_SLUG = gql`
-  query PagesSlug {
-    pages {
-      nodes {
-        databaseId
-        slug
-        title
-        link
-      }
-    }
-  }
-`;
+export default Landing;

@@ -14,25 +14,9 @@ const PAGES_SLUG = gql`
   }
 `;
 
-const contenido = {
-  a: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-     Eius, minima. Porro quasi eum fugiat incidunt! Quis possimus,
-      consectetur aspernatur eligendi pariatur totam iure nemo recusandae
-       ipsum quisquam. Nemo, facere architecto.`,
-  b: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Eius, minima. Porro quasi eum fugiat incidunt! Quis possimus,
-     consectetur aspernatur eligendi pariatur totam iure nemo recusandae
-      ipsum quisquam. Nemo, facere architecto.`,
-};
-
 const Header = () => {
-  const {
-    loading,
-    error,
-    data: { pages },
-  } = useQuery(PAGES_SLUG);
+  const { loading, error, data } = useQuery(PAGES_SLUG);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
   return (
     <header className=" bg-gray-300">
@@ -42,8 +26,14 @@ const Header = () => {
           Entrenamiento + acompañamiento, vida y deporte
         </h1>
       </div>
-      <NavMobile className="block md:hide" pages={pages} />
-      <NavDesktop className="hidden md:block" />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <NavDesktop className="hidden md:block" />
+          <NavMobile className="block md:hide" pages={data.pages} />
+        </>
+      )}
     </header>
   );
 };
