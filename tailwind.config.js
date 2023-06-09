@@ -3,7 +3,7 @@ export default {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
-      'sans': ['Arimo']
+      'sans': ['Roboto']
     },
     extend: {
       colors: {
