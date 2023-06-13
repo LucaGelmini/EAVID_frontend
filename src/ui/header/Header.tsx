@@ -1,4 +1,5 @@
 import logo from "../../assets/Recurso 14@4x.png";
+import Spinner from "../Spinner";
 import NavDesktop from "./components/NavDesktop";
 import NavMobile from "./components/NavMobile";
 import { useQuery, gql } from "@apollo/client";
@@ -19,19 +20,19 @@ const Header = () => {
 
   if (error) return <p>Error : {error.message}</p>;
   return (
-    <header className=" bg-gray-300">
-      <div className="flex justify-around h-16">
-        <img src={logo} alt="logo EAVID" />
-        <h1 className="max-w-xl text-lg font-semibold text-center">
+    <header className="border-b-4 border-black flex justify-between">
+      <div className="flex justify-around h-20">
+        <img src={logo} alt="logo EAVID" className="" />
+        <h1 className="hidden md:block max-w-xl text-lg font-semibold text-center">
           Entrenamiento + acompañamiento, vida y deporte
         </h1>
       </div>
       {loading ? (
-        <p>Loading...</p>
+        <Spinner className="" />
       ) : (
         <>
           <NavDesktop className="hidden md:block" />
-          <NavMobile className="block md:hide" pages={data.pages} />
+          <NavMobile className=" m-4 md:hidden" pages={data.pages} />
         </>
       )}
     </header>
