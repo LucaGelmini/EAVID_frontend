@@ -1,6 +1,7 @@
 import Main from "../layouts/Main";
 import { useQuery, gql } from "@apollo/client";
 import Spinner from "../ui/Spinner";
+import "../assets/landingPosts.css";
 
 const CATEGORY_POSTS_QUERY = gql`
   query CategoryPosts($categoryName: String!) {
@@ -27,10 +28,11 @@ function Landing() {
       {loading ? (
         <Spinner className="w-full" />
       ) : (
-        // <button onClick={() => console.log(data)}>rrrrrrr</button>
-
         data.posts.nodes.map((node: { content: string }) => (
-          <div dangerouslySetInnerHTML={{ __html: node.content }} />
+          <article
+            className="wp-post"
+            dangerouslySetInnerHTML={{ __html: node.content }}
+          />
         ))
       )}
     </Main>

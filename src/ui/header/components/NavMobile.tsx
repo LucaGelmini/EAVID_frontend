@@ -52,7 +52,7 @@ const NavMobile = ({ className, pages }: Props) => {
         <div
           className={`${
             isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          } absolute top-20 left-0 flex flex-col items-center w-full bg-neutral-100 rounded shadow-lg transition-all duration-300 transform ease-in-out`}
+          } absolute z-10 top-20 left-0 flex flex-col items-center w-full bg-neutral-100 rounded shadow-lg transition-all duration-300 transform ease-in-out`}
         >
           {isOpen && (
             <div className="flex flex-col items-center mt-2 w-48  rounded shadow-lg">
