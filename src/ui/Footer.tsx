@@ -1,7 +1,13 @@
-interface Props {}
+interface Props {
+  className?: string;
+}
 
-function Footer({}: Props) {
-  return <div>Footer</div>;
+function Footer({ className = "" }: Props) {
+  return (
+    <footer className={className + "w-full "}>
+      <p>Footer</p>
+    </footer>
+  );
 }
 
 export default Footer;
