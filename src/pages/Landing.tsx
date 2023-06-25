@@ -28,8 +28,9 @@ function Landing() {
       {loading ? (
         <Spinner className="w-full" />
       ) : (
-        data.posts.nodes.map((node: { content: string }) => (
+        data.posts.nodes.map((node: { content: string; id: number }) => (
           <article
+            key={node.id}
             className="wp-post"
             dangerouslySetInnerHTML={{ __html: node.content }}
           />
