@@ -2,6 +2,7 @@ import Main from "../layouts/Main";
 import { useQuery, gql } from "@apollo/client";
 import Spinner from "../ui/Spinner";
 import "../assets/landingPosts.css";
+import LandingPost from "../components/LandingPost";
 
 const CATEGORY_POSTS_QUERY = gql`
   query CategoryPosts($categoryName: String!) {
@@ -9,7 +10,29 @@ const CATEGORY_POSTS_QUERY = gql`
       nodes {
         id
         title
-        content
+        editorBlocks(flat: true) {
+          __typename
+          clientId
+          parentClientId
+          ... on CoreHeading {
+            attributes {
+              content
+            }
+          }
+          ... on CoreCover {
+            attributes {
+              url
+              backgroundType
+              align
+            }
+          }
+          ... on CoreParagraph {
+            attributes {
+              content
+              align
+            }
+          }
+        }
       }
     }
   }
@@ -28,12 +51,7 @@ function Landing() {
       {loading ? (
         <Spinner className="w-full" />
       ) : (
-        data.posts.nodes.map((node: { content: string }) => (
-          <article
-            className="wp-post"
-            dangerouslySetInnerHTML={{ __html: node.content }}
-          />
-        ))
+        data.posts.nodes.map((node) => <LandingPost node={node} />)
       )}
     </Main>
   );

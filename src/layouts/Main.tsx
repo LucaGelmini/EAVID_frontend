@@ -8,7 +8,9 @@ const Main = ({ children }: Props) => {
   return (
     <div className="bg-natural-100 w-full min-h-screen">
       <Header />
-      <main className="m-auto w-full">{children}</main>
+      <main className="m-auto w-full flex flex-col justify-around">
+        {children}
+      </main>
       <Footer />
     </div>
   );
