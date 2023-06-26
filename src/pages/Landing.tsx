@@ -1,45 +1,16 @@
 import Main from "../layouts/Main";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import Spinner from "../ui/Spinner";
 import "../assets/landingPosts.css";
 import LandingPost from "../components/LandingPost";
-
-const CATEGORY_POSTS_QUERY = gql`
-  query CategoryPosts($categoryName: String!) {
-    posts(where: { categoryName: $categoryName }) {
-      nodes {
-        id
-        title
-        editorBlocks(flat: true) {
-          __typename
-          clientId
-          parentClientId
-          ... on CoreHeading {
-            attributes {
-              content
-            }
-          }
-          ... on CoreCover {
-            attributes {
-              url
-              backgroundType
-              align
-            }
-          }
-          ... on CoreParagraph {
-            attributes {
-              content
-              align
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import {
+  CategoryPostsQuery,
+  CategoryPostsQueryVariables,
+} from "./generated/graphql.ts";
+import categoryPosts from "../graphql/categoryPosts.gql";
 
 function Landing() {
-  const { loading, error, data } = useQuery(CATEGORY_POSTS_QUERY, {
+  const { loading, error, data } = useQuery(categoryPosts, {
     variables: { categoryName: "landing" },
   });
   if (error) {

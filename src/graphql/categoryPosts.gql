@@ -1,0 +1,31 @@
+query CategoryPosts($categoryName: String!) {
+  posts(where: { categoryName: $categoryName }) {
+    nodes {
+      id
+      title
+      editorBlocks(flat: true) {
+        __typename
+        clientId
+        parentClientId
+        ... on CoreHeading {
+          attributes {
+            content
+          }
+        }
+        ... on CoreCover {
+          attributes {
+            url
+            backgroundType
+            align
+          }
+        }
+        ... on CoreParagraph {
+          attributes {
+            content
+            align
+          }
+        }
+      }
+    }
+  }
+}

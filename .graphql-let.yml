@@ -1,0 +1,6 @@
+# codegen.yml
+schema: "https://eavid.online/cms/graphql"
+documents: "src/**/*.graphql"
+plugins:
+  - typescript-operations
+  - typed-document-node

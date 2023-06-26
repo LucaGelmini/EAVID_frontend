@@ -23,6 +23,7 @@ interface Props {
 }
 
 const LandingPost = ({ node, className = "" }: Props) => {
+  console.log(node);
   const headings = node.editorBlocks.filter(
     (block) => block.__typename == "CoreHeading"
   );
