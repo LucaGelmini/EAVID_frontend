@@ -10,7 +10,8 @@ import {
 import categoryPosts from "../graphql/categoryPosts.gql";
 
 function Landing() {
-  const { loading, error, data } = useQuery(categoryPosts, {
+  const categoryPostsQuery  = categoryPosts as CategoryPostsQuery
+  const { loading, error, data } = useQuery(categoryPostsQuery, {
     variables: { categoryName: "landing" },
   });
   if (error) {
