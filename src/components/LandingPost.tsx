@@ -1,24 +1,8 @@
-interface Node {
-  id: string;
-  title: string;
-  editorBlocks: EditorBlock[];
-}
-
-interface EditorBlock {
-  __typename: "CoreHeading" | "CoreParagraph" | "CoreCover";
-  clientId: string;
-  parentClientId: string | null;
-  attributes: {
-    content?: string;
-    align?: string;
-    url?: string;
-    backgroundType?: string;
-    level?: number;
-  };
-}
+import type { PostNode } from "../types/queryTypes";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
-  node: Node;
+  node: PostNode;
   className?: string;
 }
 
@@ -32,35 +16,40 @@ const LandingPost = ({ node, className = "" }: Props) => {
   const paragraphs = node.editorBlocks.filter(
     (block) => block.__typename == "CoreParagraph"
   );
+
+  const coverImageStyle = (mediaQuery: "mobile" | "desktop") => {
+    const cSSProperties: React.CSSProperties = {
+      backgroundImage: (
+        mediaQuery === "mobile"
+          ? window.innerWidth < 768
+          : window.innerWidth > 768
+      )
+        ? `url(${covers[0].attributes.url})`
+        : "none",
+      backgroundSize: "cover",
+    };
+    return cSSProperties;
+  };
   return (
     <article
-      className={`grid grid-cols-1 h-full md:grid-cols-2 md:grid-rows-1 ${className}`}
-      style={{
-        backgroundImage:
-          window.innerWidth < 768 ? `url(${covers[0].attributes.url})` : "none",
-      }}
+      className={`flex flex-col md:grid  h-full md:grid-cols-2 md:grid-rows-1 ${className}`}
+      style={coverImageStyle("mobile")}
     >
-      <div
-        className="md:bg-transparent"
-        style={{
-          backgroundImage:
-            window.innerWidth > 768
-              ? `url(${covers[0].attributes.url})`
-              : "none",
-        }}
-      >
-        {headings.map((heading) =>
-          heading.attributes.level == 1 ? (
-            <h1>{heading.attributes.content}</h1>
-          ) : (
-            <h2>{heading.attributes.content}</h2>
-          )
-        )}
-      </div>
-      <div>
-        {paragraphs.map((paragraph) => (
-          <p>{paragraph.attributes.content}</p>
-        ))}
+      <div className="my-auto h-full">
+        <div className="md:bg-transparent" style={coverImageStyle("desktop")}>
+          {headings.map((heading) =>
+            heading.attributes.level == 1 ? (
+              <h1 key={uuidv4()}>{heading.attributes.content}</h1>
+            ) : (
+              <h2 key={uuidv4()}>{heading.attributes.content}</h2>
+            )
+          )}
+        </div>
+        <div>
+          {paragraphs.map((paragraph) => (
+            <p key={uuidv4()}>{paragraph.attributes.content}</p>
+          ))}
+        </div>
       </div>
     </article>
   );
