@@ -1,10 +1,4 @@
 import { useState } from "react";
-import Spinner from "../../Spinner";
-const paginas = [
-  { name: "pag 1", url: "#" },
-  { name: "pag 2", url: "#" },
-  { name: "pag 3", url: "#" },
-];
 
 interface Props {
   className: string;

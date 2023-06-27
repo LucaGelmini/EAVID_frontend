@@ -42,35 +42,27 @@ export type EditorBlock = {
   __typename: "CoreHeading" | "CoreParagraph" | "CoreCover";
   clientId: string;
   parentClientId: string | null;
-  attributes: {
-    content?: string;
-    align?: string;
-    url?: string;
-    backgroundType?: string;
-    level?: number;
-  };
+  attributes: CoreBlockAttributes;
 };
 
-export type CoreBlockAttributes<T> = {
-  content?: T;
-  align?: T;
-  url?: T;
-  backgroundType?: T;
-  level?: T;
+export type CoreBlockAttributes = {
+  __typename: string;
+  content?: string;
+  align?: "right" | "center" | "left" | null;
+  url?: string;
+  backgroundType?: string;
+  level?: number;
+  textColor?: string;
 };
 
 export type CoreHeadingBlock = EditorBlock & {
   __typename: "CoreHeading";
-  attributes: CoreBlockAttributes<string>;
 };
 
 export type CoreParagraphBlock = EditorBlock & {
   __typename: "CoreParagraph";
-  attributes: CoreBlockAttributes<string>;
 };
 
 export type CoreCoverBlock = EditorBlock & {
   __typename: "CoreCover";
-  attributes: CoreBlockAttributes<string>;
-  innerBlocks: EditorBlock[];
 };

@@ -18,6 +18,8 @@ const CATEGORY_POSTS_QUERY = gql`
           ... on CoreHeading {
             attributes {
               content
+              textColor
+              level
             }
           }
           ... on CoreCover {
