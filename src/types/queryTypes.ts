@@ -53,6 +53,7 @@ export type CoreBlockAttributes = {
   backgroundType?: string;
   level?: number;
   textColor?: string;
+  focalPoint?: string;
 };
 
 export type CoreHeadingBlock = EditorBlock & {

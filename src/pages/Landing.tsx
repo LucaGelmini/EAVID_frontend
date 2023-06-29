@@ -27,6 +27,7 @@ const CATEGORY_POSTS_QUERY = gql`
               url
               backgroundType
               align
+              focalPoint
             }
           }
           ... on CoreParagraph {

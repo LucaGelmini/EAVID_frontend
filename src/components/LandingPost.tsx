@@ -43,7 +43,13 @@ const LandingPost = ({ node, className = "" }: Props) => {
         ...wordpressStylesFromBlock(covers[0].attributes),
       }}
     >
-      <div className="relative md:w-1/2" style={coverImageStyle("desktop")}>
+      <div
+        className="relative md:w-1/2"
+        style={{
+          ...wordpressStylesFromBlock(covers[0].attributes),
+          ...coverImageStyle("desktop"),
+        }}
+      >
         {headings.map((heading) =>
           heading.attributes.level === 1 ? (
             <h1
