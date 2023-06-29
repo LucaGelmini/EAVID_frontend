@@ -1,6 +1,7 @@
-import { wordpressStylesFromBlock } from "../helpers/wordpressStylesFromBlock";
+// import { wpStylesFromBlockAtributes } from "../wordPress/wpStylesFromBlockAtributes";
 import type { PostNode } from "../types/queryTypes";
 import { v4 as uuidv4 } from "uuid";
+import { wpStylesFromBlock } from "../wordPress/wpStylesFromBLock";
 
 interface Props {
   node: PostNode;
@@ -39,14 +40,14 @@ const LandingPost = ({ node, className = "" }: Props) => {
           : "md:flex-row"
       } ${className}`}
       style={{
-        ...coverImageStyle("mobile"),
-        ...wordpressStylesFromBlock(covers[0].attributes),
+        ...wpStylesFromBlock(covers[0]),
+        backgroundColor: "transparent",
       }}
     >
       <div
         className="relative md:w-1/2"
         style={{
-          ...wordpressStylesFromBlock(covers[0].attributes),
+          ...wpStylesFromBlock(covers[0]),
           ...coverImageStyle("desktop"),
         }}
       >
@@ -54,7 +55,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
           heading.attributes.level === 1 ? (
             <h1
               className="relative text-4xl font-semibold md:m-8"
-              style={wordpressStylesFromBlock(heading.attributes)}
+              style={wpStylesFromBlock(heading)}
               key={uuidv4()}
             >
               {heading.attributes.content}
@@ -62,7 +63,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
           ) : (
             <h2
               className="absolute text-2xl font-semibold top-1/2 block w-full m-auto text-center"
-              style={wordpressStylesFromBlock(heading.attributes)}
+              style={wpStylesFromBlock(heading)}
               key={uuidv4()}
             >
               {heading.attributes.content}
@@ -72,10 +73,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
       </div>
       <div className="md:p-8 md:w-1/2">
         {paragraphs.map((paragraph) => (
-          <p
-            style={wordpressStylesFromBlock(paragraph.attributes)}
-            key={uuidv4()}
-          >
+          <p style={wpStylesFromBlock(paragraph)} key={uuidv4()}>
             {paragraph.attributes.content}
           </p>
         ))}

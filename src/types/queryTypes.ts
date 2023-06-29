@@ -42,6 +42,7 @@ export type EditorBlock = {
   __typename: "CoreHeading" | "CoreParagraph" | "CoreCover";
   clientId: string;
   parentClientId: string | null;
+  renderedHtml: string;
   attributes: CoreBlockAttributes;
 };
 
@@ -54,6 +55,7 @@ export type CoreBlockAttributes = {
   level?: number;
   textColor?: string;
   focalPoint?: string;
+  backgroundColor?: string;
 };
 
 export type CoreHeadingBlock = EditorBlock & {

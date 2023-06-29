@@ -16,13 +16,16 @@ const CATEGORY_POSTS_QUERY = gql`
           clientId
           parentClientId
           ... on CoreHeading {
+            renderedHtml
             attributes {
               content
               textColor
               level
+              backgroundColor
             }
           }
           ... on CoreCover {
+            renderedHtml
             attributes {
               url
               backgroundType
@@ -31,9 +34,12 @@ const CATEGORY_POSTS_QUERY = gql`
             }
           }
           ... on CoreParagraph {
+            renderedHtml
             attributes {
               content
               align
+              textColor
+              backgroundColor
             }
           }
         }
