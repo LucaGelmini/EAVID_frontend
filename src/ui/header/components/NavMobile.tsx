@@ -1,15 +1,9 @@
 import { useState } from "react";
+import { PagesData } from "../../../types/queryTypes";
 
 interface Props {
   className: string;
-  pages: {
-    nodes: Array<{
-      databaseId: number;
-      slug: string;
-      title: string;
-      link: string;
-    }>;
-  };
+  pages: PagesData["pages"];
 }
 
 const NavMobile = ({ className, pages }: Props) => {

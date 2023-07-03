@@ -1,0 +1,30 @@
+query getPage($databaseId: ID!) {
+  page(id: $databaseId, idType: DATABASE_ID) {
+    title
+    databaseId
+    slug
+    editorBlocks(flat: true) {
+      clientId
+      parentClientId
+      __typename
+      ... on CoreHeading {
+        renderedHtml
+        attributes {
+          content
+          textColor
+          level
+          backgroundColor
+        }
+      }
+      ... on CoreParagraph {
+        renderedHtml
+        attributes {
+          content
+          align
+          textColor
+          backgroundColor
+        }
+      }
+    }
+  }
+}

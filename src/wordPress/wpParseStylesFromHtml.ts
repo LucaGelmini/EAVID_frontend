@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 
 export const wpParseStylesFromHtml = (renderedHtml: string) => {
-  // console.log(">>>>>>", renderedHtml);
   const wrapper = document.createElement("div");
   wrapper.innerHTML = renderedHtml;
 
@@ -24,6 +23,6 @@ export const wpParseStylesFromHtml = (renderedHtml: string) => {
     styles.backgroundColor = `rgb(${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
     styles.opacity = parseFloat(rgba[4]);
   }
-  console.log(">>", element.style.backgroundColor);
+
   return styles;
 };

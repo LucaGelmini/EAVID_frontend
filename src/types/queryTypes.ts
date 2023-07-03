@@ -38,6 +38,20 @@ export type PostNode = {
   editorBlocks: EditorBlock[];
 };
 
+export type PagesData = {
+  pages: {
+    nodes: PageNode[];
+  };
+};
+
+export type PageNode = {
+  databaseId: number;
+  id?: string;
+  title: string;
+  slug?: string;
+  editorBlocks?: EditorBlock[];
+};
+
 export type EditorBlock = {
   __typename: "CoreHeading" | "CoreParagraph" | "CoreCover";
   clientId: string;
@@ -55,7 +69,10 @@ export type CoreBlockAttributes = {
   level?: number;
   textColor?: string;
   focalPoint?: string;
-  backgroundColor?: string;
+  backgroundColor?: string | null;
+  overlayColor?: string | null;
+  customOverlayColor?: string | null;
+  dimRatio?: number | null;
 };
 
 export type CoreHeadingBlock = EditorBlock & {

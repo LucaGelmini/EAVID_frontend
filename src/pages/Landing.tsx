@@ -1,62 +1,20 @@
 import Main from "../layouts/Main";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import Spinner from "../ui/Spinner";
 import "../assets/landingPosts.css";
 import LandingPost from "../components/LandingPost";
 import type { UseQueryResult, PostsData } from "../types/queryTypes";
-
-const CATEGORY_POSTS_QUERY = gql`
-  query CategoryPosts($categoryName: String!) {
-    posts(where: { categoryName: $categoryName }) {
-      nodes {
-        id
-        title
-        editorBlocks(flat: true) {
-          __typename
-          clientId
-          parentClientId
-          ... on CoreHeading {
-            renderedHtml
-            attributes {
-              content
-              textColor
-              level
-              backgroundColor
-            }
-          }
-          ... on CoreCover {
-            renderedHtml
-            attributes {
-              url
-              backgroundType
-              align
-              focalPoint
-            }
-          }
-          ... on CoreParagraph {
-            renderedHtml
-            attributes {
-              content
-              align
-              textColor
-              backgroundColor
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
 
 function Landing() {
   const { loading, error, data }: UseQueryResult<PostsData> = useQuery(
-    CATEGORY_POSTS_QUERY,
+    landingPostsQuery,
     {
       variables: { categoryName: "landing" },
     }
   );
   if (error) {
-    console.log(error);
+    console.error(error);
   }
   return (
     <Main>
