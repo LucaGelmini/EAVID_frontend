@@ -38,10 +38,10 @@ const Header = () => {
 
   return (
     <header className="border-b-4 border-black ">
-      <div className="flex justify-between">
+      <div className="flex justify-between bg-eavid-600">
         <div className="flex justify-between items-stretch w-full h-20">
           <img src={logo} alt="logo EAVID" className="" />
-          <h1 className="hidden md:block max-w-xl text-lg self-center font-semibold text-center px-8">
+          <h1 className="hidden md:block text-white text-lg font-light italic md:text-4xl md:w-full self-center text-center px-8">
             Entrenamiento + acompañamiento, vida y deporte
           </h1>
         </div>
