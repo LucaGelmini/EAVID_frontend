@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PagesData } from "../../../types/queryTypes";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   className: string;
@@ -45,13 +46,21 @@ const NavMobile = ({ className, pages }: Props) => {
           {isOpen && (
             <div className="flex flex-col items-center mt-2 w-48  rounded shadow-lg">
               {pages.nodes.map((node, idx) => (
-                <a
+                <NavLink
                   key={idx}
-                  href={"/" + node.slug}
-                  className="block px-4 my-2 w-full text-center border-black border-2"
+                  to={"/" + node.slug}
+                  className={({ isPending, isActive }) =>
+                    `block px-4 my-2 w-full text-center border-black border-2 ${
+                      isActive
+                        ? "bg-black text-white"
+                        : isPending
+                        ? "bg-white text-black"
+                        : ""
+                    }`
+                  }
                 >
                   {node.title}
-                </a>
+                </NavLink>
               ))}
             </div>
           )}

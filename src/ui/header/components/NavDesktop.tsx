@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { PagesData } from "../../../types/queryTypes";
 
 interface Props {
@@ -11,13 +12,21 @@ const NavDesktop = ({ className, pages }: Props) => {
       className={`flex justify-between border-t-2 border-black ${className}`}
     >
       {pages.nodes.map((node, idx) => (
-        <a
+        <NavLink
           key={idx}
-          href={"/" + node.slug}
-          className=" px-4 m-2 w-full text-center border-black border-2 hover:bg-black hover:text-white transition duration-200"
+          to={"/" + node.slug}
+          className={({ isPending, isActive }) =>
+            `block px-4 my-2 w-full text-center border-black border-2 hover:bg-black hover:text-white transition duration-200 ${
+              isActive
+                ? "bg-black text-white"
+                : isPending
+                ? "bg-white text-black"
+                : ""
+            }`
+          }
         >
           {node.title}
-        </a>
+        </NavLink>
       ))}
     </div>
   );

@@ -55,7 +55,10 @@ const LandingPost = ({ node, className = "" }: Props) => {
       >
         {headings.map((heading) =>
           heading.attributes.level === 1 ? (
-            <div className="inline-block border-black border-x-2 p-2 bg-eavid-500 skew-y-6 transform-gpu -rotate-6 m-4">
+            <div
+              className="inline-block border-black border-x-2 p-2 bg-eavid-500 skew-y-6 transform-gpu -rotate-6 m-4"
+              key={uuidv4()}
+            >
               <h2
                 className="relative text-4xl font-semibold -skew-y-6 transform-gpu rotate-6"
                 style={wpStylesFromBlock(heading)}

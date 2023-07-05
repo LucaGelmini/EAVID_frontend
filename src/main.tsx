@@ -34,6 +34,7 @@ client
     query: PAGES_SLUG_ID,
   })
   .then((pagesSlugId: ApolloQueryResult<pagesSlugId>) => {
+    console.log("ew");
     const routes = [
       {
         path: "/",
