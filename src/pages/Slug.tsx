@@ -5,6 +5,7 @@ import Main from "../layouts/Main";
 import Spinner from "../ui/Spinner";
 import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
 import LandingPost from "../components/LandingPost";
+import ContactForm from "../components/ContactForm";
 
 type Props = {
   databaseId: number;
@@ -43,6 +44,7 @@ const Slug = ({ databaseId }: Props) => {
           <div className="w-3/4 mx-auto p-4">
             <h1 className="text-3xl font-semibold">{data.page.title}</h1>
             {data.page.editorBlocks?.map((block) => block.attributes.content)}
+            <ContactForm />
           </div>
           <div>
             {postsData === undefined || postsLoading ? (

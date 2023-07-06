@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/Recurso 14@4x.png";
 import { PagesData, PageNode } from "../../types/queryTypes";
 import Spinner from "../Spinner";
@@ -40,7 +41,10 @@ const Header = () => {
     <header className="border-b-4 border-black ">
       <div className="flex justify-between bg-eavid-600">
         <div className="flex justify-between items-stretch w-full h-20">
-          <img src={logo} alt="logo EAVID" className="" />
+          <Link to="/">
+            <img src={logo} alt="logo EAVID" className="h-full" />
+          </Link>
+
           <h1 className="hidden md:block text-white text-lg font-light italic md:text-4xl md:w-full self-center text-center px-8">
             Entrenamiento + acompañamiento, vida y deporte
           </h1>

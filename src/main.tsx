@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import type { ApolloQueryResult } from "@apollo/client";
 import Slug from "./pages/Slug.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const PAGES_SLUG_ID = gql`
   query PagesSlugId {
@@ -55,7 +56,9 @@ client
     ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <React.StrictMode>
         <ApolloProvider client={client}>
-          <RouterProvider router={router} />
+          <ChakraProvider>
+            <RouterProvider router={router} />
+          </ChakraProvider>
         </ApolloProvider>
       </React.StrictMode>
     );

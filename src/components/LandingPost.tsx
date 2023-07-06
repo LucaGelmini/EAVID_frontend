@@ -69,7 +69,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
             </div>
           ) : (
             <h3
-              className="absolute text-2xl font-semibold top-1/2 block w-full m-auto text-center"
+              className="absolute my-10 md:my-0 text-2xl font-semibold top-1/2 block w-full m-auto text-center"
               style={wpStylesFromBlock(heading)}
               key={uuidv4()}
             >
@@ -78,7 +78,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
           )
         )}
       </div>
-      <div className=" text-lg md:p-8 md:w-1/2">
+      <div className=" text-xl my-10 md:my-0 md:p-8 md:w-1/2">
         {paragraphs.map((paragraph) => (
           <p style={wpStylesFromBlock(paragraph)} key={uuidv4()}>
             {paragraph.attributes.content}
