@@ -3,8 +3,8 @@ import type { CSSProperties } from "react";
 export const wpParseStylesFromHtml = (renderedHtml: string) => {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = renderedHtml;
-
   const element = wrapper.querySelector("h2");
+
   if (!element) {
     return null;
   }
