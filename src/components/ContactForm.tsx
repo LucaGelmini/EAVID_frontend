@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FieldInputProps, FormikProps } from "formik";
 import {
   FormControl,
   FormLabel,
@@ -9,15 +9,22 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-type Props = {};
+type FormValues = {
+  comentario: string;
+  name: string;
+};
+type FieldCallbackProps = {
+  field: FieldInputProps<string>;
+  form: FormikProps<FormValues>;
+};
 
-const ContactForm = (props: Props) => {
+// type Props = {};
+
+const ContactForm = () => {
   function validateName(value: string | undefined) {
     let error;
-    if (!value) {
-      error = "Name is required";
-    } else if (value.toLowerCase() !== "naruto") {
-      error = "Jeez! You're not a fan 😱";
+    if (!value?.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+      error = "Ingresá un correo válido";
     }
     return error;
   }
@@ -31,7 +38,7 @@ const ContactForm = (props: Props) => {
 
   return (
     <Formik
-      initialValues={{ name: "Sasuke" }}
+      initialValues={{ name: "" }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -42,9 +49,12 @@ const ContactForm = (props: Props) => {
       {(props) => (
         <Form>
           <Field name="comentario" validate={validateTextArea}>
-            {({ field, form }) => (
+            {({ field, form }: FieldCallbackProps) => (
               <FormControl
-                isInvalid={form.errors.comentario && form.touched.comentario}
+                isInvalid={
+                  form.touched.comentario &&
+                  form.errors.comentario !== undefined
+                }
               >
                 <FormLabel>Contanos algo</FormLabel>
                 <Textarea {...field} lang="es"></Textarea>
@@ -55,11 +65,13 @@ const ContactForm = (props: Props) => {
           </Field>
 
           <Field name="name" validate={validateName}>
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.name && form.touched.name}>
+            {({ field, form }: FieldCallbackProps) => (
+              <FormControl
+                isInvalid={form.errors.name !== undefined && form.touched.name}
+              >
                 <FormLabel>First name</FormLabel>
                 <Input {...field} placeholder="name" />
-                <FormHelperText>aguante Naruto</FormHelperText>
+                <FormHelperText>Mail válido</FormHelperText>
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
               </FormControl>
             )}
