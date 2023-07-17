@@ -1,7 +1,7 @@
-// import { wpStylesFromBlockAtributes } from "../wordPress/wpStylesFromBlockAtributes";
 import type { PostNode } from "../types/queryTypes";
 import { v4 as uuidv4 } from "uuid";
 import { wpStylesFromBlock } from "../wordPress/wpStylesFromBlock";
+import { PostH2, PostH3, PostParagraph } from "./postComponents";
 
 interface Props {
   node: PostNode;
@@ -59,30 +59,24 @@ const LandingPost = ({ node, className = "" }: Props) => {
               className="inline-block border-black border-x-2 p-2 bg-eavid-500 skew-y-6 transform-gpu -rotate-6 m-4"
               key={uuidv4()}
             >
-              <h2
+              <PostH2
+                block={heading}
                 className="relative text-4xl font-semibold -skew-y-6 transform-gpu rotate-6"
-                style={wpStylesFromBlock(heading)}
                 key={uuidv4()}
-              >
-                {heading.attributes.content}
-              </h2>
+              />
             </div>
           ) : (
-            <h3
-              className="absolute my-10 md:my-0 text-2xl font-semibold top-1/2 block w-full m-auto text-center"
-              style={wpStylesFromBlock(heading)}
+            <PostH3
               key={uuidv4()}
-            >
-              {heading.attributes.content}
-            </h3>
+              block={heading}
+              className="absolute my-10 md:my-0 text-2xl font-semibold top-1/2 block w-full m-auto text-center"
+            />
           )
         )}
       </div>
       <div className=" text-xl my-10 md:my-0 md:p-8 md:w-1/2">
         {paragraphs.map((paragraph) => (
-          <p style={wpStylesFromBlock(paragraph)} key={uuidv4()}>
-            {paragraph.attributes.content}
-          </p>
+          <PostParagraph key={uuidv4()} block={paragraph} />
         ))}
       </div>
     </article>

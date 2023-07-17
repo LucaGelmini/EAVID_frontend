@@ -16,6 +16,10 @@ const PAGES_SLUG_ID = gql`
       nodes {
         databaseId
         slug
+        contactFormPage {
+          paginaDeContacto
+          correoDeContacto
+        }
       }
     }
   }
@@ -26,6 +30,10 @@ type pagesSlugId = {
     nodes: Array<{
       databaseId: number;
       slug: string;
+      contactFormPage: {
+        paginaDeContacto: boolean | null;
+        correoDeContacto: string | undefined;
+      };
     }>;
   };
 };
@@ -35,7 +43,6 @@ client
     query: PAGES_SLUG_ID,
   })
   .then((pagesSlugId: ApolloQueryResult<pagesSlugId>) => {
-    console.log("ew");
     const routes = [
       {
         path: "/",
@@ -45,10 +52,23 @@ client
         path: "*",
         element: <NotFound />,
       },
-      ...pagesSlugId.data.pages.nodes.map((pageSlugID) => ({
-        path: "/" + pageSlugID.slug,
-        element: <Slug databaseId={pageSlugID.databaseId} />,
-      })),
+      ...pagesSlugId.data.pages.nodes.map((pageSlugID) => {
+        console.log(pageSlugID.contactFormPage);
+        const { paginaDeContacto, correoDeContacto } =
+          pageSlugID.contactFormPage !== undefined
+            ? pageSlugID.contactFormPage
+            : { paginaDeContacto: false, correoDeContacto: "" };
+        return {
+          path: "/" + pageSlugID.slug,
+          element: (
+            <Slug
+              databaseId={pageSlugID.databaseId}
+              hasContactForm={paginaDeContacto}
+              contactMail={correoDeContacto}
+            />
+          ),
+        };
+      }),
     ];
 
     const router = createBrowserRouter(routes);
