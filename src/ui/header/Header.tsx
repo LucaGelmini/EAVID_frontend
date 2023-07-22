@@ -40,9 +40,9 @@ const Header = () => {
   return (
     <header className="border-b-4 border-black ">
       <div className="flex justify-between bg-eavid-600">
-        <div className="flex justify-between items-stretch w-full h-20">
-          <Link to="/">
-            <img src={logo} alt="logo EAVID" className="h-full" />
+        <div className="flex justify-between items-stretch w-full h-24">
+          <Link to="/" className="w-60">
+            <img src={logo} alt="logo EAVID" className="h-full m-auto" />
           </Link>
 
           <h1 className="hidden md:block text-white text-lg font-light italic md:text-4xl md:w-full self-center text-center px-8">
@@ -52,9 +52,7 @@ const Header = () => {
         {loading || data == undefined ? (
           <Spinner className="md:hidden" />
         ) : (
-          <>
-            <NavMobile className=" m-4 md:hidden" pages={handleSlugs(data)} />
-          </>
+          <NavMobile className=" m-4 md:hidden" pages={handleSlugs(data)} />
         )}
       </div>
       {loading || data == undefined ? (

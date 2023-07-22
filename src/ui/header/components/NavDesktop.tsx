@@ -9,19 +9,15 @@ interface Props {
 const NavDesktop = ({ className, pages }: Props) => {
   return (
     <div
-      className={`flex justify-between border-t-2 border-black ${className}`}
+      className={`flex justify-around bg-eavid-600 border-black ${className}`}
     >
       {pages.nodes.map((node, idx) => (
         <NavLink
           key={idx}
           to={"/" + node.slug}
           className={({ isPending, isActive }) =>
-            `block px-4 my-2 w-full text-center border-black border-2 hover:bg-black hover:text-white transition duration-200 ${
-              isActive
-                ? "bg-black text-white"
-                : isPending
-                ? "bg-white text-black"
-                : ""
+            `block px-4 my-2 text-center rounded-full shadow-custom hover:shadow-customHover bg-white  border-black border-2 transition duration-200 ${
+              isActive ? " underline" : isPending ? "bg-white text-black" : ""
             }`
           }
         >

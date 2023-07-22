@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import type { UseQueryResult, PageNode, PostsData } from "../types/queryTypes";
 import pageQuery from "../graphql/pageQuery.graphql";
-import mailMutation from "../graphql/mailMutation.graphql";
 import Main from "../layouts/Main";
 import Spinner from "../ui/Spinner";
 import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
 import LandingPost from "../components/LandingPost";
 import ContactForm from "../components/ContactForm";
 import client from "../graphql/apolloClient.ts";
+import { Skeleton, Stack } from "@chakra-ui/react";
 
 type Props = {
   databaseId: number;
   hasContactForm?: boolean | null;
-  contactMail?: string | null;
+  contactMail: string | null;
 };
 
 const Slug = ({ databaseId, hasContactForm, contactMail }: Props) => {
@@ -44,24 +44,24 @@ const Slug = ({ databaseId, hasContactForm, contactMail }: Props) => {
     }
   }, [loading, data]);
 
-  client
-    .mutate({
-      mutation: mailMutation,
-    })
-    .then(console.log)
-    .catch(console.error);
-
   return (
     <Main>
       {data === undefined || loading ? (
-        <Spinner className="w-full" />
+        <Stack height="full" mt="20">
+          <Skeleton height="30px" width={40} />
+          <Skeleton height={40} />
+          <Skeleton height="80px" />
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+        </Stack>
       ) : (
         <>
           {hasContactForm && (
             <div className="w-3/4 mx-auto p-4">
               <h1 className="text-3xl font-semibold">{data.page.title}</h1>
               {data.page.editorBlocks?.map((block) => block.attributes.content)}
-              <ContactForm />
+              {contactMail && <ContactForm contactMail={contactMail} />}
             </div>
           )}
           <div>

@@ -32,7 +32,7 @@ type pagesSlugId = {
       slug: string;
       contactFormPage: {
         paginaDeContacto: boolean | null;
-        correoDeContacto: string | undefined;
+        correoDeContacto: string | null;
       };
     }>;
   };
@@ -53,7 +53,6 @@ client
         element: <NotFound />,
       },
       ...pagesSlugId.data.pages.nodes.map((pageSlugID) => {
-        console.log(pageSlugID.contactFormPage);
         const { paginaDeContacto, correoDeContacto } =
           pageSlugID.contactFormPage !== undefined
             ? pageSlugID.contactFormPage

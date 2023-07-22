@@ -1,13 +1,10 @@
-mutation SEND_EMAIL($to:String!, $from:String! , $subject:String! : $body:String! : ) {
-  sendEmail(
-    input: {
-      to: "lucagelmini@hotmail.com"
-      from: "test@test.com"
-      subject: "test email"
-      body: "test email"
-      clientMutationId: "test"
-    }
-  ) {
+mutation SEND_EMAIL(
+  $to: String!
+  $subject: String!
+  $from: String!
+  $body: String!
+) {
+  sendEmail(input: { to: $to, from: $from, subject: $subject, body: $body }) {
     origin
     sent
     message

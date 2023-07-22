@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PagesData } from "../../../types/queryTypes";
 import { NavLink } from "react-router-dom";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 interface Props {
   className: string;
@@ -23,31 +24,30 @@ const NavMobile = ({ className, pages }: Props) => {
           className="md:hidden p-2 rounded border-black border-2"
           type="button"
         >
-          {/* Hamburger menu icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            width="24"
-            height="24"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm1 5a1 1 0 100 2h12a1 1 0 100-2H4z"
-              clipRule="evenodd"
-            />
-          </svg>
+          {isOpen ? (
+            <CloseIcon width="6" height="6" />
+          ) : (
+            <HamburgerIcon width="6" height="6" />
+          )}
         </button>
-        <div
-          className={`${
-            isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          } absolute z-10 top-20 left-0 flex flex-col items-center w-full bg-neutral-100 rounded shadow-lg transition-all duration-300 transform ease-in-out`}
-        >
-          {isOpen && (
+        {isOpen && (
+          <div
+            onClick={() => setIsOpen(false)}
+            className={`absolute top-0 left-0 h-screen w-screen z-10`}
+          />
+        )}
+
+        {isOpen && (
+          <div
+            className={`${
+              isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            } absolute z-20 top-20 left-0 flex flex-col items-center w-full bg-neutral-100 rounded shadow-lg transition-all duration-300 transform ease-in-out`}
+          >
             <div className="flex flex-col items-center mt-2 w-48  rounded shadow-lg">
               {pages.nodes.map((node, idx) => (
                 <NavLink
                   key={idx}
+                  onClick={() => setIsOpen(false)}
                   to={"/" + node.slug}
                   className={({ isPending, isActive }) =>
                     `block px-4 my-2 w-full text-center border-black border-2 ${
@@ -63,8 +63,8 @@ const NavMobile = ({ className, pages }: Props) => {
                 </NavLink>
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </nav>
   );
