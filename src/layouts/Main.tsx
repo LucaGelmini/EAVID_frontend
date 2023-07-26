@@ -6,9 +6,9 @@ interface Props {
 }
 const Main = ({ children }: Props) => {
   return (
-    <div className="bg-natural-100 w-full h-full min-h-screen">
+    <div className="bg-natural-100 w-full h-full min-h-screen flex flex-col justify-between">
       <Header />
-      <main className="m-auto w-full flex flex-col justify-stretch min-h-screen">
+      <main className=" w-full flex flex-col justify-around min-h-full">
         {children}
       </main>
       <Footer />

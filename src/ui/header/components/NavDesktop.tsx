@@ -16,7 +16,7 @@ const NavDesktop = ({ className, pages }: Props) => {
           key={idx}
           to={"/" + node.slug}
           className={({ isPending, isActive }) =>
-            `block px-4 my-2 text-center rounded-full shadow-custom hover:shadow-customHover bg-white  border-black border-2 transition duration-200 ${
+            `block px-4 my-2 text-center rounded-full shadow-custom-sm hover:shadow-customHover-sm bg-white  border-black border-2 transition duration-200 ${
               isActive ? " underline" : isPending ? "bg-white text-black" : ""
             }`
           }
