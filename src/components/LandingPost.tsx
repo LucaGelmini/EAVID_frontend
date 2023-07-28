@@ -40,7 +40,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
 
   return (
     <article
-      className={`flex flex-col h-full flex-1 min-h-fit p-8 md:p-0 ${
+      className={`flex flex-col h-full w-full flex-1 min-h-[200px] p-8 md:p-0 ${
         covers.length > 0 && covers[0].attributes.align === "right"
           ? "md:flex-row-reverse"
           : "md:flex-row"
@@ -56,7 +56,9 @@ const LandingPost = ({ node, className = "" }: Props) => {
     >
       <div
         className={`relative md:${
-          covers[0].attributes.align === "center" ? "w-full" : "w-1/2"
+          covers.length > 0 && covers[0].attributes.align === "center"
+            ? "w-full"
+            : "w-1/2"
         } md:shadow-custom-md my-5 md:rounded-lg md:mx-5`}
         style={
           covers.length > 0
@@ -93,8 +95,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
           </>
         )}
       </div>
-      {/* {covers.map((cover) => cover.attributes.align)} */}
-      {covers[0].attributes.align !== "center" && (
+      {covers.length > 0 && covers[0].attributes.align !== "center" && (
         <div className=" text-xl flex items-center justify-center my-10 md:my-0 md:p-8 md:w-1/2">
           {paragraphs.length > 0 &&
             paragraphs.map((paragraph) => (

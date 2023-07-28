@@ -1,11 +1,10 @@
 import Main from "../layouts/Main";
 import { useQuery } from "@apollo/client";
-import Spinner from "../ui/Spinner";
 import "../assets/landingPosts.css";
 import LandingPost from "../components/LandingPost";
 import type { UseQueryResult, PostsData } from "../types/queryTypes";
 import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
-import { Box, Flex, Skeleton, Stack } from "@chakra-ui/react";
+import { Box, Skeleton, Stack, Text } from "@chakra-ui/react";
 
 function Landing() {
   const { loading, error, data }: UseQueryResult<PostsData> = useQuery(
@@ -28,12 +27,16 @@ function Landing() {
           <Skeleton height="20px" />
           <Skeleton height="20px" />
         </Stack>
-      ) : (
+      ) : data.posts.nodes.length !== 0 ? (
         <>
           {data.posts.nodes.map((node) => (
             <LandingPost node={node} key={node.id} />
           ))}
         </>
+      ) : (
+        <Box className="shadow-custom-md" width="full" height="full">
+          <Text>Por aquí no hay nada todavía</Text>
+        </Box>
       )}
     </Main>
   );
