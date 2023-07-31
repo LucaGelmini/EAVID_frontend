@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "src/infrastructure/tailwind.config.js", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

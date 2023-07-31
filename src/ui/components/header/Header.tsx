@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/Recurso 14@4x.png";
-import { PagesData, PageNode } from "../../types/queryTypes";
+import { PagesData, PageNode } from "../../../types/queryTypes";
 import Spinner from "../Spinner";
 import NavDesktop from "./components/NavDesktop";
 import NavMobile from "./components/NavMobile";

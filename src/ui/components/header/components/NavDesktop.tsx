@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { PagesData } from "../../../types/queryTypes";
+import { PagesData } from "../../../../types/queryTypes";
 
 interface Props {
   className: string;

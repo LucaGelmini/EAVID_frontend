@@ -1,5 +1,5 @@
-import Footer from "../ui/Footer";
-import Header from "../ui/header/Header";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 
 interface Props {
   children: React.ReactElement;

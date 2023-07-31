@@ -1,6 +1,6 @@
-import type { EditorBlock, PostNode } from "../types/queryTypes";
+import type { EditorBlock, PostNode } from "../../types/queryTypes";
 import { v4 as uuidv4 } from "uuid";
-import { wpStylesFromBlock } from "../wordPress/wpStylesFromBlock";
+import { wpStylesFromBlock } from "../../wordPress/wpStylesFromBlock";
 import { PostH2, PostH3, PostParagraph } from "./postComponents";
 
 interface Props {

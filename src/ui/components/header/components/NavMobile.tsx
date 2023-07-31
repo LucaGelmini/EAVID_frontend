@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PagesData } from "../../../types/queryTypes";
+import { PagesData } from "../../../../types/queryTypes";
 import { NavLink } from "react-router-dom";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 

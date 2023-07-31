@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import Landing from "./pages/Landing.tsx";
 import "./assets/index.css";
 import { ApolloProvider, gql } from "@apollo/client";
-import client from "./graphql/apolloClient.ts";
+import client from "../domain/apolloClient.ts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import type { ApolloQueryResult } from "@apollo/client";
 import Slug from "./pages/Slug.tsx";

@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import options from "../infrastructure/domain.config";
 
 const client = new ApolloClient({
-  uri: "https://eavid.online/cms/graphql",
+  uri: options.graphQlEndpoint,
   cache: new InMemoryCache(),
 });
 
