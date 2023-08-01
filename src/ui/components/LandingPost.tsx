@@ -1,10 +1,11 @@
-import type { EditorBlock, PostNode } from "../../types/queryTypes";
+import type { EditorBlock } from "../../infrastructure/dto/EditorBlock";
+import type { PostNodeDTO } from "../../infrastructure/dto/PostsDTO";
 import { v4 as uuidv4 } from "uuid";
 import { wpStylesFromBlock } from "../../wordPress/wpStylesFromBlock";
 import { PostH2, PostH3, PostParagraph } from "./postComponents";
 
 interface Props {
-  node: PostNode | undefined;
+  node: PostNodeDTO | undefined;
   className?: string;
 }
 

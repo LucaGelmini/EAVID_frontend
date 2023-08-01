@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import mailMutation from "../graphql/mailMutation.graphql";
-import client from "../../domain/apolloClient.ts";
+import client from "../../infrastructure/graphql/apolloClient.ts";
 
 type FormValues = {
   body: string;

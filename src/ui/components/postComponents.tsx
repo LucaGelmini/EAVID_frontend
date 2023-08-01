@@ -5,7 +5,7 @@ import parse, {
   domToReact,
 } from "html-react-parser";
 import DOMPurify from "dompurify";
-import { EditorBlock } from "../../types/queryTypes";
+import { EditorBlock } from "../types/queryTypes";
 import { wpStylesFromBlock } from "../../wordPress/wpStylesFromBlock";
 
 type Props = {

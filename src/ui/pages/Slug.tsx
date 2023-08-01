@@ -4,14 +4,14 @@ import type {
   UseQueryResult,
   PageNode,
   PostsData,
-} from "../../types/queryTypes";
+} from "../types/queryTypes.ts";
 import pageQuery from "../graphql/pageQuery.graphql";
 import Main from "../layouts/Main";
 import Spinner from "../components/Spinner";
 import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
 import LandingPost from "../components/LandingPost";
 import ContactForm from "../components/ContactForm";
-import client from "../../domain/apolloClient.ts";
+import client from "../../infrastructure/graphql/apolloClient.ts";
 import { Skeleton, Stack } from "@chakra-ui/react";
 
 type Props = {

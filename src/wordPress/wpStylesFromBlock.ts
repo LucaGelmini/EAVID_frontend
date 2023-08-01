@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { EditorBlock } from "../types/queryTypes";
+import { EditorBlock } from "../ui/types/queryTypes";
 // import { wpParseStylesFromHtml } from "./wpParseStylesFromHtml";
 import { wpStylesFromBlockAtributes } from "./wpStylesFromBlockAtributes";
 // import DOMPurify from "dompurify";

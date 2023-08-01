@@ -1,0 +1,12 @@
+query PagesSlugId {
+  pages {
+    nodes {
+      databaseId
+      slug
+      contactFormPage {
+        paginaDeContacto
+        correoDeContacto
+      }
+    }
+  }
+}

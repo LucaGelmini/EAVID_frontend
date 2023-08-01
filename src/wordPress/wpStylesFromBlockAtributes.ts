@@ -1,4 +1,4 @@
-import type { CoreBlockAttributes } from "../types/queryTypes";
+import type { CoreBlockAttributes } from "../ui/types/queryTypes";
 import type { CSSProperties } from "react";
 export const wpStylesFromBlockAtributes = (
   blockAtributes: CoreBlockAttributes
