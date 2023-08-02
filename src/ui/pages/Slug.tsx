@@ -5,10 +5,10 @@ import type {
   PageNode,
   PostsData,
 } from "../types/queryTypes.ts";
-import pageQuery from "../graphql/pageQuery.graphql";
+import pageQuery from "../../infrastructure/graphql/pageById.query.graphql";
 import Main from "../layouts/Main";
 import Spinner from "../components/Spinner";
-import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
+import landingPostsQuery from "../../infrastructure/graphql/postsByCategory.query.graphql";
 import LandingPost from "../components/LandingPost";
 import ContactForm from "../components/ContactForm";
 import client from "../../infrastructure/graphql/apolloClient.ts";

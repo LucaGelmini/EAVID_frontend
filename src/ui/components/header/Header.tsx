@@ -46,7 +46,7 @@ const Header = () => {
           </Link>
 
           <h1 className="hidden md:block text-white text-lg font-light italic md:text-4xl md:w-full self-center text-center px-8">
-            Entrenamiento + acompañamiento, vida y deporte
+            Entrenamiento + Acompañamiento, Vida y Deporte
           </h1>
         </div>
         {loading || data == undefined ? (

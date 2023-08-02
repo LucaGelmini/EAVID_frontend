@@ -1,5 +1,5 @@
-import type { EditorBlock } from "../../infrastructure/dto/EditorBlock";
-import type { PostNodeDTO } from "../../infrastructure/dto/PostsDTO";
+import type { EditorBlock } from "../../infrastructure/dataTransferObjects/EditorBlock";
+import type { PostNodeDTO } from "../../infrastructure/dataTransferObjects/PostsDTO";
 import { v4 as uuidv4 } from "uuid";
 import { wpStylesFromBlock } from "../../wordPress/wpStylesFromBlock";
 import { PostH2, PostH3, PostParagraph } from "./postComponents";

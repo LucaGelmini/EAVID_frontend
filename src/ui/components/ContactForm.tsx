@@ -1,4 +1,11 @@
-import { Field, Form, Formik, FieldInputProps, FormikProps } from "formik";
+import {
+  Field,
+  Form,
+  Formik,
+  FieldInputProps,
+  FormikProps,
+  FormikHelpers,
+} from "formik";
 import {
   FormControl,
   FormLabel,
@@ -9,8 +16,14 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import mailMutation from "../graphql/mailMutation.graphql";
+import mailMutation from "../../infrastructure/graphql/mail.mutation.graphql";
 import client from "../../infrastructure/graphql/apolloClient.ts";
+import {
+  ZodEmail,
+  isEmail,
+} from "../../infrastructure/validations/email.validation.ts";
+
+import type { Email } from "../../domain/models/Email.ts";
 
 type FormValues = {
   body: string;
@@ -38,7 +51,10 @@ const ContactForm = ({ contactMail }: Props) => {
   const validations = {
     validateEmail: (value: string | undefined) => {
       let error;
-      if (!value?.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+      if (value === undefined) {
+        error = "Ingresá un correo";
+        formErrors.set("email", error);
+      } else if (!isEmail(value)) {
         error = "Ingresá un correo válido";
         formErrors.set("email", error);
       } else {
@@ -70,36 +86,48 @@ const ContactForm = ({ contactMail }: Props) => {
       return error;
     },
   };
+  const handleSubmit = (
+    values: {
+      body: string | "";
+      email: ZodEmail | "";
+      subject: string;
+    },
+    actions: FormikHelpers<typeof values>
+  ) => {
+    if (!isEmail(contactMail) || values.body === "" || values.email === "")
+      return;
 
+    const email: Email<ZodEmail> = {
+      to: contactMail,
+      from: values.email,
+      subject: values.subject,
+      body: values.body,
+    };
+
+    client
+      .mutate({
+        mutation: mailMutation,
+        variables: email,
+      })
+      .then((res) => {
+        if (res.data.sendEmail.sent) {
+          alert("Correo enviado");
+          console.log(res.data);
+          actions.setSubmitting(false);
+        } else {
+          throw new Error("Mail not sent");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        actions.setSubmitting(false);
+        alert("Correo NO enviado");
+      });
+  };
   return (
     <Formik
       initialValues={{ body: "", email: "", subject: "" }}
-      onSubmit={(values, actions) => {
-        client
-          .mutate({
-            mutation: mailMutation,
-            variables: {
-              to: contactMail,
-              from: values.email,
-              subject: values.subject,
-              body: values.body,
-            },
-          })
-          .then((res) => {
-            if (res.data.sendEmail.sent) {
-              alert("Correo enviado");
-              console.log(res.data);
-              actions.setSubmitting(false);
-            } else {
-              throw new Error("Mail not sent");
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            actions.setSubmitting(false);
-            alert("Correo NO enviado");
-          });
-      }}
+      onSubmit={handleSubmit}
     >
       {(props) => (
         <Form>

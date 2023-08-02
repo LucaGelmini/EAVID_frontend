@@ -2,12 +2,13 @@ import Main from "../layouts/Main";
 import { useQuery } from "@apollo/client";
 import "../assets/landingPosts.css";
 import LandingPost from "../components/LandingPost";
-import type { UseQueryResult, PostsData } from "../types/queryTypes";
-import landingPostsQuery from "../graphql/landingPostsQuery.graphql";
+import type { UseQueryResult } from "../types/queryTypes";
+import type { PostsDTO } from "../../infrastructure/dataTransferObjects/PostsDTO";
+import landingPostsQuery from "../../infrastructure/graphql/postsByCategory.query.graphql";
 import { Box, Skeleton, Stack, Text } from "@chakra-ui/react";
 
 function Landing() {
-  const { loading, error, data }: UseQueryResult<PostsData> = useQuery(
+  const { loading, error, data }: UseQueryResult<PostsDTO> = useQuery(
     landingPostsQuery,
     {
       variables: { categoryName: "landing" },
