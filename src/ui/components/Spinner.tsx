@@ -1,11 +1,17 @@
-const Spinner = (props: { className: string }) => (
+type Props = {
+  className: string;
+  w: string;
+  h: string;
+};
+
+const Spinner = ({ className, w = "w-10", h = "h-10" }: Props) => (
   <div
     role="status"
-    className={`flex justify-center items-center align-middle ${props.className}`}
+    className={`flex justify-center items-center align-middle ${className}`}
   >
     <svg
       aria-hidden="true"
-      className="w-10 h-10 mx-auto text-balance animate-spin dark:text-black fill-eavid-500"
+      className={`${w} ${h} mx-auto text-balance animate-spin dark:text-black fill-eavid-500`}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

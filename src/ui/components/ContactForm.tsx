@@ -19,7 +19,7 @@ import { useState } from "react";
 import mailMutation from "../../infrastructure/graphql/mail.mutation.graphql";
 import client from "../../infrastructure/graphql/apolloClient.ts";
 import {
-  ZodEmail,
+  EmailValidated,
   isEmail,
 } from "../../infrastructure/validations/email.validation.ts";
 
@@ -89,7 +89,7 @@ const ContactForm = ({ contactMail }: Props) => {
   const handleSubmit = (
     values: {
       body: string | "";
-      email: ZodEmail | "";
+      email: EmailValidated | "";
       subject: string;
     },
     actions: FormikHelpers<typeof values>
@@ -97,7 +97,7 @@ const ContactForm = ({ contactMail }: Props) => {
     if (!isEmail(contactMail) || values.body === "" || values.email === "")
       return;
 
-    const email: Email<ZodEmail> = {
+    const email: Email<EmailValidated> = {
       to: contactMail,
       from: values.email,
       subject: values.subject,

@@ -6,9 +6,15 @@ type titleVisible<CSSProperties> = {
 };
 type titleNotVisible = { visible: false };
 
+type IsContactPage =
+  | ({ isContactPage: true } & { contactMail: string })
+  | { isContactPage: false };
+
 export type Page<CSSProperties> = {
   id: string;
-  title: { content: string } & (titleVisible<CSSProperties> | titleNotVisible);
+  title:
+    | ({ content: string } & (titleVisible<CSSProperties> | titleNotVisible))
+    | undefined;
   slug: string;
-  content: Post<CSSProperties>[];
-};
+  content: Post<CSSProperties>[] | undefined;
+} & IsContactPage;

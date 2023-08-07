@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import type {
-  UseQueryResult,
-  PageNode,
-  PostsData,
-} from "../types/queryTypes.ts";
+import type { UseQueryResult } from "../types/queryTypes.ts";
+import type { PageNodeDTO } from "../../infrastructure/dataTransferObjects/PagesDTO.ts";
+import type { PostsDTO } from "../../infrastructure/dataTransferObjects/PostsDTO.ts";
 import pageQuery from "../../infrastructure/graphql/pageById.query.graphql";
 import Main from "../layouts/Main";
 import Spinner from "../components/Spinner";
@@ -15,25 +13,23 @@ import client from "../../infrastructure/graphql/apolloClient.ts";
 import { Skeleton, Stack } from "@chakra-ui/react";
 
 type Props = {
-  databaseId: number;
-  hasContactForm?: boolean | null;
+  databaseId: string;
+  hasContactForm: boolean;
   contactMail: string | null;
 };
 
 const Slug = ({ databaseId, hasContactForm, contactMail }: Props) => {
-  const { loading, error, data }: UseQueryResult<{ page: PageNode }> = useQuery(
-    pageQuery,
-    {
+  const { loading, error, data }: UseQueryResult<{ page: PageNodeDTO }> =
+    useQuery(pageQuery, {
       variables: {
         databaseId: databaseId,
       },
-    }
-  );
+    });
   if (error) {
     console.error(error);
   }
 
-  const [postsData, setPostData] = useState<PostsData | undefined>(undefined);
+  const [postsData, setPostData] = useState<PostsDTO | undefined>(undefined);
   useEffect(() => {
     if (!loading && data !== undefined) {
       client

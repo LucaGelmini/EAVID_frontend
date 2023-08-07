@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/Recurso 14@4x.png";
-import { PagesData, PageNode } from "../../types/queryTypes";
+import {
+  PagesDTO,
+  PageNodeDTO,
+} from "../../../infrastructure/dataTransferObjects/PagesDTO";
 import Spinner from "../Spinner";
 import NavDesktop from "./components/NavDesktop";
 import NavMobile from "./components/NavMobile";
@@ -18,14 +21,14 @@ const PAGES_SLUG = gql`
 `;
 
 const Header = () => {
-  const { loading, error, data } = useQuery<PagesData>(PAGES_SLUG, {
+  const { loading, error, data } = useQuery<PagesDTO>(PAGES_SLUG, {
     fetchPolicy: "cache-and-network",
   });
 
   if (error) return <p>Error : {error.message}</p>;
 
-  const handleSlugs = (slugsData: PagesData) => {
-    const pages: { nodes: PageNode[] } =
+  const handleSlugs = (slugsData: PagesDTO) => {
+    const pages: { nodes: PageNodeDTO[] } =
       data != undefined
         ? {
             nodes: [
