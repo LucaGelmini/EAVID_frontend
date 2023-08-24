@@ -40,7 +40,7 @@ const LandingPost = ({ node, className = "" }: Props) => {
 
   return (
     <article
-      className={`flex flex-col h-full flex-1 min-h-fit p-8 md:p-0 ${
+      className={`flex flex-col h-full flex-1 min-h-[500px] p-8 md:p-0 ${
         covers.length > 0 && covers[0].attributes.align === "right"
           ? "md:flex-row-reverse"
           : "md:flex-row"
