@@ -64,7 +64,7 @@ const Slug = ({ databaseId, hasContactForm, contactMail }: Props) => {
               {contactMail && <ContactForm contactMail={contactMail} />}
             </div>
           )}
-          <div>
+          <>
             {postsData === undefined ? (
               <Spinner className="w-full" />
             ) : (
@@ -74,7 +74,7 @@ const Slug = ({ databaseId, hasContactForm, contactMail }: Props) => {
                 ))}
               </>
             )}
-          </div>
+          </>
         </>
       )}
     </Main>
