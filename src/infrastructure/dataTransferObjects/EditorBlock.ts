@@ -1,5 +1,5 @@
 export type EditorBlock = {
-  __typename: "CoreHeading" | "CoreParagraph" | "CoreCover";
+  __typename: "CoreHeading" | "CoreParagraph" | "CoreCover" | "CoreEmbed";
   clientId: string;
   parentClientId: string | null;
   renderedHtml: string;
@@ -19,6 +19,7 @@ export type CoreBlockAttributes = {
   overlayColor?: string | null;
   customOverlayColor?: string | null;
   dimRatio?: number | null;
+  providerNameSlug?: string;
 };
 
 export type CoreHeadingBlock = EditorBlock & {

@@ -1,7 +1,7 @@
 type Props = {
   className: string;
-  w: string;
-  h: string;
+  w?: string;
+  h?: string;
 };
 
 const Spinner = ({ className, w = "w-10", h = "h-10" }: Props) => (

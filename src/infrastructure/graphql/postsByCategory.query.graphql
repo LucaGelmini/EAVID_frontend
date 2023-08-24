@@ -37,6 +37,14 @@ query CategoryPosts($categoryName: String!) {
             backgroundColor
           }
         }
+        ... on CoreEmbed {
+          apiVersion
+          blockEditorCategoryName
+          attributes {
+            url
+            providerNameSlug
+          }
+        }
       }
     }
   }

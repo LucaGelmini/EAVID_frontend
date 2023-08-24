@@ -2,7 +2,12 @@ import type { EditorBlock } from "../../infrastructure/dataTransferObjects/Edito
 import type { PostNodeDTO } from "../../infrastructure/dataTransferObjects/PostsDTO";
 import { v4 as uuidv4 } from "uuid";
 import { wpStylesFromBlock } from "../../wordPress/wpStylesFromBlock";
-import { PostH2, PostH3, PostParagraph } from "./postComponents";
+import {
+  PostH2,
+  PostH3,
+  PostParagraph,
+  SpotifyEmbeded,
+} from "./postComponents";
 
 interface Props {
   node: PostNodeDTO | undefined;
@@ -20,6 +25,11 @@ const LandingPost = ({ node, className = "" }: Props) => {
   const paragraphs: EditorBlock[] | undefined[] = node.editorBlocks.filter(
     (block) => block.__typename == "CoreParagraph"
   );
+  const embededs: EditorBlock[] | undefined[] = node.editorBlocks.filter(
+    (block) => block.__typename == "CoreEmbed"
+  );
+
+  // console.log(headings, covers, paragraphs, embededs);
 
   const coverImageStyle = (
     mediaQuery: "mobile" | "desktop",
@@ -102,6 +112,9 @@ const LandingPost = ({ node, className = "" }: Props) => {
             paragraphs.map((paragraph) => (
               <PostParagraph key={uuidv4()} block={paragraph} />
             ))}
+          {embededs.map((embeded) => (
+            <SpotifyEmbeded block={embeded} />
+          ))}
         </div>
       )}
     </article>

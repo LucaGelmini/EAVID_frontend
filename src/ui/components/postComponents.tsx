@@ -5,8 +5,10 @@ import parse, {
   domToReact,
 } from "html-react-parser";
 import DOMPurify from "dompurify";
-import { EditorBlock } from "../types/queryTypes";
+import { EditorBlock } from "../../infrastructure/dataTransferObjects/EditorBlock";
 import { wpStylesFromBlock } from "../../wordPress/wpStylesFromBlock";
+import { Spotify } from "react-spotify-embed";
+import { z } from "zod";
 
 type Props = {
   className?: string;
@@ -68,4 +70,12 @@ export const PostParagraph = ({ className = "", block }: Props) => {
     },
   };
   return <>{parse(html, options)}</>;
+};
+
+export const SpotifyEmbeded = ({ block }: Props) => {
+  let url = block.attributes.url;
+  const isUrlSchema = z.string().url();
+  if (url === undefined || !isUrlSchema.safeParse(url)) return null;
+  url = url.replace("/intl-es", "").split("?")[0] + "?utm_source=generator";
+  return <Spotify wide link={url} />;
 };
